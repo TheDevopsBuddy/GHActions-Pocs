@@ -1,4 +1,4 @@
-loss-consumer:
+my-application:
   team:
     env: sandbox
   application:
