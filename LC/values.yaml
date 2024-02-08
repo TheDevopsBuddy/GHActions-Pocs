@@ -1,4 +1,4 @@
-loss-consumer:
+my-application:
   team:
     name: my-team
     region: eu1
