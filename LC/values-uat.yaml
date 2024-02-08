@@ -1,0 +1,6 @@
+loss-consumer:
+  team:
+    env: sandbox
+  application:
+    image:
+      tag: some-test-tag
