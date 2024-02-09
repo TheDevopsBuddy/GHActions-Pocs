@@ -3,4 +3,4 @@ my-application:
     env: sandbox
   application:
     image:
-      tag: test-fff2730f99e4739c68221647e72d2df39f8f3427
+      tag: test-685769e709f123185a89ddc08995580d5c7923c0
