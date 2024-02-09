@@ -3,4 +3,4 @@ my-application:
     env: sandbox
   application:
     image:
-      tag: test-tag
+      tag: test-tag-1
