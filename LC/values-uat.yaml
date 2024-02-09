@@ -3,4 +3,4 @@ my-application:
     env: sandbox
   application:
     image:
-      tag: mangesh
+      tag: test-tag
