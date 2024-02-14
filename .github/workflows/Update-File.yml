@@ -39,7 +39,7 @@ jobs:
         else
           # git config --global user.email "mangeshsuryawanshi.tdg@gmail.com"
           # git config --global  user.name "TheDevopsBuddy"
-          git config --unset-all http.https://github.com/.extraheader
+          #git config --unset-all http.https://github.com/.extraheader
           git config --global user.email "dummy@jones.com"
           git config --global  user.name "Dummy Jones"          
           git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
