@@ -1,0 +1,38 @@
+name: CICD
+
+on:
+ push:
+ workflow_dispatch:
+
+# permissions:
+#   id-token: write
+#   contents: write
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - name: Clone Target Repo #GHActions repo containing files to be edited
+      uses: actions/checkout@v4
+      with:
+        repository: TheDevopsBuddy/GHActions-Pocs
+        path: ./GHActions-Poc
+        ref: 'main'
+        #token: ${{ secrets.GITHUB_TOKEN }}
+        #token: ${{ secrets.GH_PAT }}        
+    - name: Dir Stat
+      run: |
+        ls
+        pwd
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy svc/job
+        uses: ./.github/workflows/deployer.yaml@main
+        with:
+          folder: JOB
+          file: values-uat.yaml
+          node: my-applicaton

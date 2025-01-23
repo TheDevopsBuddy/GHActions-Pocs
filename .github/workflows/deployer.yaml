@@ -1,8 +1,22 @@
-name: Bumping tag
-
+name: The Deployer
 on:
-  push:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      folder:
+        description: svc/job folder
+        required: true
+        type: string
+      file:
+        description: path of file to edit
+        required: true
+        type: string
+      node:
+        description: ops node
+        required: true
+        type: string
+        default: my-application
+  # push:
+  # workflow_dispatch:
 # permissions:
 #   id-token: write
 #   contents: write
@@ -14,10 +28,6 @@ jobs:
       id-token: write
       contents: write
     steps:
-    - name: Clean up
-      run: |
-            rm -rf ./GHActions-Poc
-            mkdir ./GHActions-Poc
     - name: Clone Target Repo #GHActions repo containing files to be edited
       uses: actions/checkout@v4
       with:
