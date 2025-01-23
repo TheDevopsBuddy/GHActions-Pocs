@@ -34,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Deploy svc/job
-      uses: ./.github/workflows/action.yaml
+      uses: ./.github/workflows/action.yml
       with:
         folder: JOB
         file: values-uat.yaml
