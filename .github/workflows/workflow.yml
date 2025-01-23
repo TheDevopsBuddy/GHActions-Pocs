@@ -26,15 +26,13 @@ jobs:
       run: |
         ls
         pwd
-        ls
+        ls -la
         pwd
+        tree
   CD:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Deploy svc/job
-      uses: ./.github/workflows/action.yml
-      with:
-        folder: LC
-        file: values-uat.yaml
-        node: my-applicaton
+    uses: ./.github/workflows/deployer.yml
+    needs: CI
+    with:
+      folder: LC
+      file: values-uat.yaml
+      node: my-applicaton
