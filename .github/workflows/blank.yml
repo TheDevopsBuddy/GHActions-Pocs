@@ -23,13 +23,14 @@ jobs:
       with:
         repository: TheDevopsBuddy/GHActions-Pocs
         path: ./GHActions-Poc
-        ref: 'feat/Update-file'
+        ref: 'main'
         #token: ${{ secrets.GITHUB_TOKEN }}
         #token: ${{ secrets.GH_PAT }}        
     - name: Bump Image Tag
       run: |
         yq e ".my-application.application.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/LC/values-uat.yaml
-
+        yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
+        yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
         
     - name: Commit and Push
       run: |
