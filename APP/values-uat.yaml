@@ -1,0 +1,6 @@
+my-application:
+  team:
+    env: sandbox
+  application:
+    image:
+      tag: test-'bdb3be61dbc58799c07c3cd6eb603e26d062b00b'
