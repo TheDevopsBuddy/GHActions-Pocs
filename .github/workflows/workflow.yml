@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy svc/job
-        uses: ./.github/workflows/deployer.yaml@main
+        uses: ./.github/workflows/deployer.yaml
         with:
           folder: JOB
           file: values-uat.yaml
