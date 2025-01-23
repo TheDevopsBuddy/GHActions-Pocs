@@ -3,4 +3,4 @@ my-application:
     env: sandbox
   job:
     image:
-      tag: test-'bdb3be61dbc58799c07c3cd6eb603e26d062b00b'
+      tag: test-'9cc5d1cced9b8ca7b0b94579785c2eb76c4cce6c'
