@@ -1,0 +1,59 @@
+name: The Deployer
+on:
+  workflow_call:
+    inputs:
+      folder:
+        description: svc/job folder
+        required: true
+        type: string
+      file:
+        description: path of file to edit
+        required: true
+        type: string
+      node:
+        description: ops node
+        required: true
+        type: string
+        default: my-application
+  # push:
+  # workflow_dispatch:
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - name: Clone Target Repo #GHActions repo containing files to be edited
+      uses: actions/checkout@v4
+      with:
+        repository: TheDevopsBuddy/GHActions-Pocs
+        path: ./GHActions-Poc
+        ref: 'main'
+        #token: ${{ secrets.GITHUB_TOKEN }}
+        #token: ${{ secrets.GH_PAT }}        
+    - name: Bump Image Tag
+      run: |
+        yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
+        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
+        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
+        
+    - name: Commit and Push
+      run: |
+        cd ./GHActions-Poc
+        git add .
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "No changes detected."
+        else
+          # git config --global user.email "mangeshsuryawanshi.tdg@gmail.com"
+          # git config --global  user.name "TheDevopsBuddy"
+          #git config --unset-all http.https://github.com/.extraheader
+          git config --global user.email "dummy@jones.com"
+          git config --global  user.name "Dummy Jones"          
+          git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
+          git push origin main
+        fi
