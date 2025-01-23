@@ -45,5 +45,5 @@ jobs:
           git config --global user.email "dummy@jones.com"
           git config --global  user.name "Dummy Jones"          
           git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
-          git push origin feat/Update-file
+          git push origin main
         fi
