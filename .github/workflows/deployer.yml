@@ -42,14 +42,12 @@ jobs:
         ls -la
         pwd
         tree
-        cat ${{inputs.folder}}/${{inputs.file}}
         yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
         # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
         # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
         cat ${{inputs.folder}}/${{inputs.file}}
     - name: Commit and Push
       run: |
-        cd ./GHActions-Poc
         git add .
         if [ -z "$(git status --porcelain)" ]; then
           echo "No changes detected."
