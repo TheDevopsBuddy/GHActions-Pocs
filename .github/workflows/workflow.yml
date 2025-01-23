@@ -19,7 +19,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: TheDevopsBuddy/GHActions-Pocs
-        path: ./GHActions-Poc
         ref: 'main'
         #token: ${{ secrets.GITHUB_TOKEN }}
         #token: ${{ secrets.GH_PAT }}        
