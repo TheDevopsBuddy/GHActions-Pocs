@@ -17,9 +17,9 @@ on:
         default: my-application
   # push:
   # workflow_dispatch:
-# permissions:
-#   id-token: write
-#   contents: write
+permissions:
+  id-token: write
+  contents: write
 
 jobs:
   update-file:
@@ -38,9 +38,9 @@ jobs:
         #token: ${{ secrets.GH_PAT }}        
     - name: Bump Image Tag
       run: |
-        yq e ".my-application.application.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/LC/values-uat.yaml
-        yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
-        yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
+        yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
+        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
+        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
         
     - name: Commit and Push
       run: |
