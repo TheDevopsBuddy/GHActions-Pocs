@@ -38,6 +38,11 @@ jobs:
         #token: ${{ secrets.GH_PAT }}        
     - name: Bump Image Tag
       run: |
+        ls
+        pwd
+        ls -la
+        pwd
+        tree
         yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
         # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
         # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
