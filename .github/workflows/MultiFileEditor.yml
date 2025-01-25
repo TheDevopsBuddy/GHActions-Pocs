@@ -1,4 +1,4 @@
-name: The Deployer
+name: The Editor
 on:
   workflow_call:
     inputs:
