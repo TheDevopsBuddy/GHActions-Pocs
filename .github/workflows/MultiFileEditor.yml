@@ -43,8 +43,9 @@ jobs:
       shell: bash
       run: |
         my_files="${{ inputs.test-files}}"
-        IFS=',' read -ra elements <<< "$my-files"
-        for element in "${element[@]}"; do 
+        IFS=',' read -r -a elements <<< "$my-files"
+        for element in "${elements[@]}"; do 
+          echo "Item: $element"
           echo "Item: $element" >> files.txt
         done
     # - name: Commit and Push
