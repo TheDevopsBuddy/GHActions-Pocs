@@ -46,10 +46,11 @@ jobs:
         ls -la
         pwd
         tree
-        yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
-        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
-        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
-        cat ${{inputs.folder}}/${{inputs.file}}
+        my_files="${{ github.event.inputs.test-files}}"
+        IFS=',' read -ra elements <<< "$my-files"
+        for element in "${element[@]}"; do 
+          echo "Item: $element"
+        done
     - name: Commit and Push
       run: |
         git add .
