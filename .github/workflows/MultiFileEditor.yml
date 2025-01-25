@@ -41,7 +41,7 @@ jobs:
         #token: ${{ secrets.GH_PAT }}        
     - name: Bump Image Tag
       run: |
-        my_files="${{ github.event.inputs.test-files}}"
+        my_files="${{ inputs.test-files}}"
         IFS=',' read -ra elements <<< "$my-files"
         for element in "${element[@]}"; do 
           echo "Item: $element"
