@@ -4,3 +4,7 @@ my-application:
   application:
     image:
       tag: test-'9cc5d1cced9b8ca7b0b94579785c2eb76c4cce6c'
+my-applicaton:
+  application:
+    image:
+      tag: test-'c7fea8cee1f719510ebfdf7b6f44b5a991d79786'
