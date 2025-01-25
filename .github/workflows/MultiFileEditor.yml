@@ -47,7 +47,6 @@ jobs:
         for element in "${element[@]}"; do 
           echo "Item: $element" >> files.txt
         done
-        cat files.txt
     # - name: Commit and Push
     #   run: |
     #     git add .
