@@ -4,7 +4,8 @@ on:
 #  push:
  workflow_dispatch:
  create:
-
+  - refs/tags/staging-v.*
+  - refs/tags/v.*
 # permissions:
 #   id-token: write
 #   contents: write
@@ -12,7 +13,8 @@ on:
 jobs:
   STAGING:
     # # if: github.event.created.ref == 'staging-v*'
-    if: ${{ github.ref}} == 'refs/tags/staging-v.*'
+    # if: ${{ github.ref}} == 'refs/tags/staging-v.*'
+    if: contains(%{{github.ref }}, 'refs/tags/staging-v')
     runs-on: ubuntu-latest
     permissions:
       id-token: write
