@@ -15,7 +15,7 @@ on:
 jobs:
   STAGING:
     # if: github.event.created.ref == 'staging-v*'
-    if: github.ref =~ 'refs/tags/staging-v.*'
+    if: github.ref == 'refs/tags/staging-v.*'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
