@@ -24,7 +24,7 @@ jobs:
     - name: This STAGING #GHActions repo containing files to be edited
       run: echo "this is staging"      
   PROD:
-    if: github.event.created.ref == 'v*'
+    if: github.event.created.ref == 'refs/tags/v*'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
