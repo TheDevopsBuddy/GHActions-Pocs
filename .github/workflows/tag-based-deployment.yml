@@ -1,12 +1,24 @@
 name: Tag Based Deployment
 
 on:
+  push:
+    branches:    
   workflow_dispatch:
   create:
     tags:
       - '*'
 
 jobs:
+  TEST:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: TEST
+        run: echo "This is test"
   STAGING:
     if: contains(github.ref, 'refs/tags/staging-v')
     runs-on: ubuntu-latest
