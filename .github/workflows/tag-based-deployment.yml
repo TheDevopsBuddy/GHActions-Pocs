@@ -1,7 +1,7 @@
 name: Tag Based Deployment
 
 on:
- push:
+#  push:
  workflow_dispatch:
  create:
    tags:
