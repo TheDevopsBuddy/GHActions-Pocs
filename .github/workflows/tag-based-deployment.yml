@@ -4,9 +4,6 @@ on:
 #  push:
  workflow_dispatch:
  create:
-   tags:
-    - 'staging-v*'
-    - 'v*'
 
 # permissions:
 #   id-token: write
