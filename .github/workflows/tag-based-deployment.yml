@@ -1,32 +1,32 @@
 name: Tag Based Deployment
 
 on:
- workflow_dispatch:
- create:
-   tags:
-    -'*'
-# permissions:
-#   id-token: write
-#   contents: write
+  workflow_dispatch:
+  create:
+    tags:
+      - '*'
 
 jobs:
   STAGING:
-    # # if: github.event.created.ref == 'staging-v*'
-    # if: ${{ github.ref}} == 'refs/tags/staging-v.*'
-    if: contains(${{ github.ref }}, 'refs/tags/staging-v')
+    if: contains(github.ref, 'refs/tags/staging-v')
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
     steps:
-    - name: This STAGING #GHActions repo containing files to be edited
-      run: echo "this is ${{ github.ref}}"      
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: STAGING Deployment
+        run: echo "Deploying to STAGING for ref ${{ github.ref }}"
+
   PROD:
-    if: ${{ github.ref}} == 'refs/tags/v.*'
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
     steps:
-    - name: This PROD #GHActions repo containing files to be edited
-      run: echo "this is ${{ github.ref}}"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: PROD Deployment
+        run: echo "Deploying to PROD for ref ${{ github.ref }}"
