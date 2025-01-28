@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: TEST
-        run: echo "This is test"
+        run: echo "This is test runs by default"
   STAGING:
     if: contains(github.ref, 'refs/tags/staging-v')
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: STAGING Deployment
-        run: echo "Deploying to STAGING for ref ${{ github.ref }}"
+        run: echo This runs for STAGING for tag push ${{ github.ref }}"
 
   PROD:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -41,4 +41,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: PROD Deployment
-        run: echo "Deploying to PROD for ref ${{ github.ref }}"
+        run: echo "this runs for PROD for tag push ${{ github.ref }}"
