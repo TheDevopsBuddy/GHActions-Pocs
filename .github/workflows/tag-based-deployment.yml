@@ -24,11 +24,11 @@ jobs:
     - name: This STAGING #GHActions repo containing files to be edited
       run: echo "this is ${{ github.ref}}"      
   PROD:
-    # if: github.event.created.ref == 'refs/tags/v*'
+    if: ${{ github.ref}} == 'refs/tags/v.*'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
     steps:
     - name: This PROD #GHActions repo containing files to be edited
-      run: echo "this is PROD"
+      run: echo "this is ${{ github.ref}}"
