@@ -13,30 +13,21 @@ on:
 #   contents: write
 
 jobs:
-  # CI:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: write
-  #   steps:
-  #   - name: Clone Target Repo #GHActions repo containing files to be edited
-  #     uses: actions/checkout@v4
-  #     with:
-  #       repository: TheDevopsBuddy/GHActions-Pocs
-  #       ref: 'main'
-  #       #token: ${{ secrets.GITHUB_TOKEN }}
-  #       #token: ${{ secrets.GH_PAT }}        
-  #   - name: Dir Stat
-  #     run: |
-  #       ls
-  #       pwd
-  #       ls -la
-  #       pwd
-  #       tree
-  CD:
-    uses: ./.github/workflows/MultiFileEditor.yml
-    with:
-      folder: LC
-      file: values-uat.yaml
-      node: my-application
-      test-files: 'mangesh,mohan,nikhil'
+  STAGING:
+    if: github.event.created.ref == 'staging-v*'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - name: This STAGING #GHActions repo containing files to be edited
+      run: echo "this is staging"      
+  PROD:
+    if: github.event.created.ref == 'staging-v*'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - name: This PROD #GHActions repo containing files to be edited
+      run: echo "this is PROD"
