@@ -3,6 +3,8 @@ name: Tag Based Deployment
 on:
  workflow_dispatch:
  create:
+   tags:
+    -'*'
 # permissions:
 #   id-token: write
 #   contents: write
