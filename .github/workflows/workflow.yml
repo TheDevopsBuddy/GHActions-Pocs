@@ -71,6 +71,6 @@ jobs:
         run: echo "variable=test" >> $GITHUB_OUTPUT
 
       - name: Variable Parser
-        uses: ./.github/actions/var-parse
+        uses: ./.github/actions/var-parse/action.yml
         with:
           variable: ${{ steps.set-env.outputs.variable }}
