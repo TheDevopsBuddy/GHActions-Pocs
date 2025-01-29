@@ -52,6 +52,13 @@ jobs:
   #     node: my-application
   #     test-files: 'mangesh,mohan,nikhil'
   var-passing:
-    uses: ./.github/workflows/var-parse.yml
-    with:
-      variable: Mangesh    
+    runs-on: ubuntu-latest
+    outputs:
+      variable: ${{ steps.var.outputs.var}}
+    steps:
+      - name: set env
+        id: var
+        run: echo variable='this is variable' >> $GITHUB_OUTPUT
+      - uses: ./.github/workflows/var-parse.yml
+        with:
+          variable: ${{ env.variable}}    
