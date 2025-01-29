@@ -23,7 +23,7 @@ on:
         description: command to run
         required: false
         type: string
-        default: ''
+        default: 'none'
   # push:
   # workflow_dispatch:
 permissions:
