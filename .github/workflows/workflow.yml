@@ -47,8 +47,7 @@ jobs:
   COMMAND-2:
     uses: ./.github/workflows/deployer.yml
     with:
-      folder: LC
+      folder: APP
       file: values-uat.yaml
       node: my-application
       test-files: 'mangesh,mohan,nikhil'
-      command: cd LC
