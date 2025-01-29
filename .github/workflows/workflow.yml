@@ -36,3 +36,10 @@ jobs:
       file: values-uat.yaml
       node: my-application
       test-files: 'mangesh,mohan,nikhil'
+  COMMAND:
+    uses: ./.github/workflows/deployer.yml
+    with:
+      folder: LC
+      file: values-uat.yaml
+      node: my-application
+      test-files: 'mangesh,mohan,nikhil'

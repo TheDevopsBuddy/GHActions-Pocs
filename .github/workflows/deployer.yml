@@ -19,9 +19,15 @@ on:
         description: to check multiple file editor
         required: false
         type: string
+      command:
+        description: command to run
+        required: false
+        type: string
+        default: cd ${{inputs.folder}}
   # push:
   # workflow_dispatch:
 permissions:
+
   id-token: write
   contents: write
 
@@ -39,28 +45,32 @@ jobs:
         ref: 'main'
         #token: ${{ secrets.GITHUB_TOKEN }}
         #token: ${{ secrets.GH_PAT }}        
-    - name: Bump Image Tag
+    # - name: Bump Image Tag
+    #   run: |
+    #     ls
+    #     pwd
+    #     ls -la
+    #     pwd
+    #     tree
+    #     yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
+    #     # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
+    #     # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
+    #     cat ${{inputs.folder}}/${{inputs.file}}
+    # - name: Commit and Push
+    #   run: |
+    #     git add .
+    #     if [ -z "$(git status --porcelain)" ]; then
+    #       echo "No changes detected."
+    #     else
+    #       # git config --global user.email "mangeshsuryawanshi.tdg@gmail.com"
+    #       # git config --global  user.name "TheDevopsBuddy"
+    #       #git config --unset-all http.https://github.com/.extraheader
+    #       git config --global user.email "dummy@jones.com"
+    #       git config --global  user.name "Dummy Jones"          
+    #       git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
+    #       git push origin main
+    #     fi
+    - name: Run Command
       run: |
-        ls
-        pwd
-        ls -la
-        pwd
-        tree
-        yq e ".${{inputs.node}}.application.image.tag = \"test-'${{ github.sha }}'\"" -i ${{inputs.folder}}/${{inputs.file}}
-        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/JOB/values-uat.yaml
-        # yq e ".my-application.job.image.tag = \"test-'${{ github.sha }}'\"" -i ./GHActions-Poc/APP/values-uat.yaml
-        cat ${{inputs.folder}}/${{inputs.file}}
-    - name: Commit and Push
-      run: |
-        git add .
-        if [ -z "$(git status --porcelain)" ]; then
-          echo "No changes detected."
-        else
-          # git config --global user.email "mangeshsuryawanshi.tdg@gmail.com"
-          # git config --global  user.name "TheDevopsBuddy"
-          #git config --unset-all http.https://github.com/.extraheader
-          git config --global user.email "dummy@jones.com"
-          git config --global  user.name "Dummy Jones"          
-          git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
-          git push origin main
-        fi
+        ${{inputs.command}}
+      
