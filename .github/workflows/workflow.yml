@@ -61,6 +61,8 @@ jobs:
   var-passing:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4      
       - name: set env
         id: var
         run: echo variable=test >> $GITHUB_OUTPUT    
