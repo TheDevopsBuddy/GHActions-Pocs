@@ -23,10 +23,12 @@ on:
         description: command to run
         required: false
         type: string
-        default: "cd \"${{inputs.folder}}\""
+        # default: "cd \"${{inputs.folder}}\""
+        default: 'cd "${{inputs.folder}}"'
   # push:
   # workflow_dispatch:
 permissions:
+
   id-token: write
   contents: write
 
