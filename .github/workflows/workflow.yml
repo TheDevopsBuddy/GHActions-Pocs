@@ -60,14 +60,17 @@ jobs:
   #     test-files: 'mangesh,mohan,nikhil'
   var-passing:
     runs-on: ubuntu-latest
+    outputs:
+      variable: ${{ steps.set-env.outputs.variable }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4      
-      - name: set env
-        id: var
-        run: echo variable=test >> $GITHUB_OUTPUT    
-      - name: var-parse
+        uses: actions/checkout@v4
+
+      - name: Set Environment Variable
+        id: set-env
+        run: echo "variable=test" >> $GITHUB_OUTPUT
+
+      - name: Variable Parser
         uses: ./.github/actions/var-parse
         with:
-          variable: ${{ steps.var.outputs.variable }}
-
+          variable: ${{ steps.set-env.outputs.variable }}
