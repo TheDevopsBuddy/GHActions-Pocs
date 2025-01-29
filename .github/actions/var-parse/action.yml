@@ -1,0 +1,14 @@
+# .github/actions/var-parse/action.yml
+name: "Variable Parser"
+description: "A composite action to parse a variable"
+inputs:
+  variable:
+    description: "Variable to parse"
+    required: true
+    default: "Default"
+runs:
+  using: "composite"
+  steps:
+    - name: Parse Variable
+      shell: bash
+      run: echo "${{ inputs.variable }}"
