@@ -15,7 +15,7 @@ jobs:
 
       - name: Set Environment Variable
         id: set-env
-        run: echo "variable=test" >> $GITHUB_OUTPUT
+        run: echo "variable=${{ github.sha}}" >> $GITHUB_OUTPUT
 
       - name: Variable Parser
         uses: ./.github/actions/var-parse
