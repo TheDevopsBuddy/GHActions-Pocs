@@ -72,5 +72,6 @@ jobs:
     #     fi
     - name: Run Command
       run: |
+        pwd
         ${{inputs.command}}
-      
+        pwd
