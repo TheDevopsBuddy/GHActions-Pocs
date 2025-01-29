@@ -36,21 +36,21 @@ jobs:
   #     file: values-uat.yaml
   #     node: my-application
   #     test-files: 'mangesh,mohan,nikhil'
-  COMMAND:
-    runs-on: ubuntu-latest
-    steps:
-      - name: set env
-        id: var
-        run: echo variable=test >> $GITHUB_OUTPUT 
-      - name: deployer    
-        uses: ./.github/workflows/deployer.yml
-        with:
-          folder: LC
-          file: values-uat.yaml
-          node: my-application
-          test-files: 'mangesh,mohan,nikhil'
-          command: cd LC
-          variable: Mangesh
+  # COMMAND:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: set env
+  #       id: var
+  #       run: echo variable=test >> $GITHUB_OUTPUT 
+  #     - name: deployer    
+  #       uses: ./.github/workflows/deployer.yml
+  #       with:
+  #         folder: LC
+  #         file: values-uat.yaml
+  #         node: my-application
+  #         test-files: 'mangesh,mohan,nikhil'
+  #         command: cd LC
+  #         variable: Mangesh
   # COMMAND-2:
   #   uses: ./.github/workflows/deployer.yml
   #   with:
@@ -58,6 +58,14 @@ jobs:
   #     file: values-uat.yaml
   #     node: my-application
   #     test-files: 'mangesh,mohan,nikhil'
-  # var-passing:
-  #   uses: ./.github/workflows/var-parse.yml
+  var-passing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set env
+        id: var
+        run: echo variable=test >> $GITHUB_OUTPUT    
+      - name: var-parse
+        uses: ./.github/actions/var-parse
+        with:
+          variable: ${{ steps.var.outputs.variable }}
 
