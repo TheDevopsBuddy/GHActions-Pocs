@@ -26,7 +26,7 @@ on:
         # default: "cd \"${{inputs.folder}}\""
         # default: 'cd "\${{inputs.folder}}\"'
         # default: 'cd "${{inputs.folder}}"'
-        default: 'cd "$\"{{inputs.folder}}\""'
+        default: 'cd "\${{inputs.folder}}\"'
   # push:
   # workflow_dispatch:
 permissions:
