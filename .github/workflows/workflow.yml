@@ -52,5 +52,5 @@ jobs:
   #     node: my-application
   #     test-files: 'mangesh,mohan,nikhil'
   var-passing:
-    uses: ./.github/workflows/var-parse
+    uses: ./.github/workflows/var-parse.yml
 
