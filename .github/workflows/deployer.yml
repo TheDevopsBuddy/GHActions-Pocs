@@ -77,5 +77,6 @@ jobs:
     - name: Run Command
       run: |
         pwd
+        echo "${{inputs.command}}"
         ${{inputs.command}}
         pwd
