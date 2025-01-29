@@ -77,7 +77,7 @@ jobs:
       shell: bash
       run: |
         pwd
-        if [[ -z "${{inputs.command}}" ]]; then
+        if [ ${{ inputs.command}} == 'none' ]; then
           cd ${{inputs.folder}}
           pwd
         else
