@@ -1,0 +1,24 @@
+name: The Variable Parser
+on:
+  workflow_call:
+    inputs:
+      variable:
+        description: 'variable to parse'
+        default: 'Default'
+        required: true
+        type: string
+  # push:
+  # workflow_dispatch:
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  variable-parser:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+    - name: Variable Parser
+      run: echo "${{ inputs.variable}}"    
