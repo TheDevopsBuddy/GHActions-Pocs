@@ -74,11 +74,13 @@ jobs:
     #       git push origin main
     #     fi
     - name: Run Command
+      shell: bash
       run: |
         pwd
-        if [ -z "${{inputs.command}}" ]; then
+        if [[ -z "${{inputs.command}}" ]]; then
           cd ${{inputs.folder}}
           pwd
         else
           ${{inputs.command}}
+          pwd
         fi
