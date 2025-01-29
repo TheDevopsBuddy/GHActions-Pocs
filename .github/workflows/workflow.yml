@@ -60,8 +60,8 @@ jobs:
         uses: actions/checkout@v4
       - name: set env
         id: var
-        run: echo variable='this is variable' >> $GITHUB_OUTPUT
+        run: echo variable=test >> $GITHUB_OUTPUT
       - name: parser
         uses: ./.github/workflows/var-parse.yml
         with:
-          variable: ${{ env.variable}}    
+          variable: ${{ steps.var.outputs.variable }}

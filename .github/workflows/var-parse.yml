@@ -21,4 +21,4 @@ jobs:
       contents: write
     steps:
     - name: Variable Parser
-      run: echo "${{ inputs.variable}}"    
+      run: echo "${{ inputs.variable }}"
