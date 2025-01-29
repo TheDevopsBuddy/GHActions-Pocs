@@ -56,10 +56,12 @@ jobs:
     outputs:
       variable: ${{ steps.var.outputs.var}}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: set env
         id: var
         run: echo variable='this is variable' >> $GITHUB_OUTPUT
-      - uses: ./.github/workflows/var-parse.yml
+      - name: parser
+        uses: ./.github/workflows/var-parse.yml
         with:
           variable: ${{ env.variable}}    
