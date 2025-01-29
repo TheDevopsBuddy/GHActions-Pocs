@@ -78,6 +78,5 @@ jobs:
     - name: Run Command
       run: |
         pwd
-        echo "${{inputs.command}}"
-        cd ${{inputs.command}}
+        ${{inputs.command}}
         pwd
