@@ -8,16 +8,16 @@ jobs:
   var-passing:
     runs-on: ubuntu-latest
     outputs:
-      variable: ${{ steps.set-env.outputs.variable }}
+      shortSha: ${{ steps.shortSha.outputs.short_sha }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set Environment Variable
-        id: set-env
-        run: echo "variable=${{ github.sha}}" >> $GITHUB_OUTPUT
+        id: shortSha
+        run: echo short_sha=$(git rev-parse --short ${{ github.sha }}) >> $GITHUB_OUTPUT
 
       - name: Variable Parser
         uses: ./.github/actions/var-parse
         with:
-          variable: ${{ steps.set-env.outputs.variable }}
+          variable: ${{ steps.shortSha.outputs.short_sha }}
