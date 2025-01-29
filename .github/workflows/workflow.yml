@@ -1,67 +1,23 @@
 name: CICD
 
 on:
- push:
- workflow_dispatch:
-
-# permissions:
-#   id-token: write
-#   contents: write
+  push:
+  workflow_dispatch:
 
 jobs:
-  # CI:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: write
-  #   steps:
-  #   - name: Clone Target Repo #GHActions repo containing files to be edited
-  #     uses: actions/checkout@v4
-  #     with:
-  #       repository: TheDevopsBuddy/GHActions-Pocs
-  #       ref: 'main'
-  #       #token: ${{ secrets.GITHUB_TOKEN }}
-  #       #token: ${{ secrets.GH_PAT }}        
-  #   - name: Dir Stat
-  #     run: |
-  #       ls
-  #       pwd
-  #       ls -la
-  #       pwd
-  #       tree
-  # CD:
-  #   uses: ./.github/workflows/MultiFileEditor.yml
-  #   with:
-  #     folder: LC
-  #     file: values-uat.yaml
-  #     node: my-application
-  #     test-files: 'mangesh,mohan,nikhil'
-  # COMMAND:
-  #   uses: ./.github/workflows/deployer.yml
-  #   with:
-  #     folder: LC
-  #     file: values-uat.yaml
-  #     node: my-application
-  #     test-files: 'mangesh,mohan,nikhil'
-  #     command: cd LC
-  # COMMAND-2:
-  #   uses: ./.github/workflows/deployer.yml
-  #   with:
-  #     folder: APP
-  #     file: values-uat.yaml
-  #     node: my-application
-  #     test-files: 'mangesh,mohan,nikhil'
   var-passing:
     runs-on: ubuntu-latest
     outputs:
-      variable: ${{ steps.var.outputs.var}}
+      variable: ${{ steps.set-env.outputs.variable }}
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: set env
-        id: var
-        run: echo variable=test >> $GITHUB_OUTPUT
-      - name: parser
-        uses: ./.github/workflows/var-parse
+
+      - name: Set Environment Variable
+        id: set-env
+        run: echo "variable=test" >> $GITHUB_OUTPUT
+
+      - name: Variable Parser
+        uses: ./.github/actions/var-parse
         with:
-          variable: ${{ steps.var.outputs.variable }}
+          variable: ${{ steps.set-env.outputs.variable }}
