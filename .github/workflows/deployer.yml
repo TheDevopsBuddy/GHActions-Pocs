@@ -73,7 +73,7 @@ jobs:
       shell: bash
       run: |
         pwd
-        if [ ${{ github.event.inputs.command }} == null ]; then
+        if [ ${{ github.event.inputs.command }} == '' ]; then
           cd ${{inputs.folder}}
           pwd
         else
