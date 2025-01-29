@@ -24,6 +24,11 @@ on:
         required: false
         type: string
         default: ''
+      variable:
+        description: 'variable to parse'
+        default: 'Default'
+        required: false
+        type: string        
   # push:
   # workflow_dispatch:
 permissions:
@@ -69,14 +74,16 @@ jobs:
     #       git commit -m "Bumping image tag to \"test-'${{ github.sha }}'\""
     #       git push origin main
     #     fi
-    - name: Run Command
-      shell: bash
-      run: |
-        pwd
-        if [ ${{ github.event.inputs.command }} == '' ]; then
-          cd ${{inputs.folder}}
-          pwd
-        else
-          ${{inputs.command}}
-          pwd
-        fi
+    # - name: Run Command
+    #   shell: bash
+    #   run: |
+    #     pwd
+    #     if [ ${{ github.event.inputs.command }} == '' ]; then
+    #       cd ${{inputs.folder}}
+    #       pwd
+    #     else
+    #       ${{inputs.command}}
+    #       pwd
+    #     fi
+    - name: Variable Parser
+      run: echo "${{ inputs.variable }}"    
