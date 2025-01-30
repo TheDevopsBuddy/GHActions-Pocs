@@ -6,7 +6,7 @@ on:
 
 jobs:
   var-passing:
-    if: github.ref == 'refs/tags/v*'
+    if: contains(github.ref, 'refs/tags/v.')
     runs-on: ubuntu-latest
     outputs:
       shortSha: ${{ steps.shortSha.outputs.short_sha }}
