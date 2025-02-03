@@ -48,6 +48,9 @@ jobs:
           echo "Item: $element"
           echo "Item: $element" >> files.txt
         done
+    - name: Print ref
+      run: |
+        echo "Ref: ${{ github.ref }}"
     # - name: Commit and Push
     #   run: |
     #     git add .
