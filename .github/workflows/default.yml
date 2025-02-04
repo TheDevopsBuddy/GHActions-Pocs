@@ -14,24 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build project
-        run: npm run build
-
-      - name: Publish artifacts
-        run: npm run publish
-
       - name: Deploy to production
         run: echo "Deploying to production..."
 
@@ -43,22 +25,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build project
-        run: npm run build
-
-      - name: Publish artifacts
-        run: npm run publish
+      - name: Print ref
+        run: |
+         echo "Ref: ${{ github.ref }}"
+         if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            echo "Ref is main"
+         else
+            echo "Ref is not main"
+         fi
 
       - name: Deploy to UAT
         run: echo "Deploying to UAT..."
