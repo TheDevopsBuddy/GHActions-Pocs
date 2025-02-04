@@ -7,12 +7,29 @@ on:
       - 'staging*'
 
 jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+    
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Ensure on master/main
+        run: |
+          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
+            echo "Not on main branch. Exiting..."
+            exit 1
+          fi
 
       - name: Deploy to production
         run: echo "Deploying to production..."
@@ -27,15 +44,12 @@ jobs:
         with:
           branch: main
 
-      - name: Print ref
+      - name: Ensure on master/main
         run: |
-         echo "Ref: ${{ github.ref }}"
-
-         if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-            echo "Ref is main"
-         else
-            echo "Ref is not main"
-         fi
+          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
+            echo "Not on main branch. Exiting..."
+            exit 1
+          fi
 
       - name: Deploy to UAT
         run: echo "Deploying to UAT..."
