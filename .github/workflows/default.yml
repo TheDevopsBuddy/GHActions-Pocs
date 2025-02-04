@@ -2,21 +2,27 @@ name: Tag Deployment
 
 on:
   push:
-    branches:
+    branches: 
         - '**'
     tags:
       - 'v*'
       - 'staging*'
-  pull_request:
-    branches:
-      - main
+#   pull_request:
+#     branches:
+#       - main
+
+# concurrency:
+#     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+#     cancel-in-progress: true
+
 jobs:
   Test: #This should run on push to any branch
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+      # test
       - name: Run tests
         run: |
           echo "Running tests..."
@@ -26,12 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Ensure on master/main
         run: |
           if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Not on main branch. Exiting..."
+            echo "Please switch to main branch"
             exit 1
           fi
 
@@ -44,14 +52,14 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          branch: main
+            fetch-depth: 0
 
       - name: Ensure on master/main
         run: |
           if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Not on main branch. Exiting..."
+            echo "Please switch to main branch"
             exit 1
           fi
 
