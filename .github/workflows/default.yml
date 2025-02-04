@@ -8,14 +8,6 @@ on:
       - 'v*'
       - 'staging*'
 
-#   pull_request:
-#     branches:
-#       - main
-
-# concurrency:
-#     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-#     cancel-in-progress: true
-
 jobs:
   Test: #This should run on push to any branch
     runs-on: ubuntu-latest
@@ -37,13 +29,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Ensure on master/main
-        run: |
-          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Please switch to main branch"
-            exit 1
-          fi
-
       - name: Deploy to production
         run: echo "Deploying to production..."
 
@@ -56,13 +41,6 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 0
-
-      - name: Ensure on master/main
-        run: |
-          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Please switch to main branch"
-            exit 1
-          fi
 
       - name: Deploy to UAT
         run: echo "Deploying to UAT..."
