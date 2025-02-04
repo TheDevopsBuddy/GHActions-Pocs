@@ -24,10 +24,13 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          branch: main
 
       - name: Print ref
         run: |
          echo "Ref: ${{ github.ref }}"
+
          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
             echo "Ref is main"
          else
