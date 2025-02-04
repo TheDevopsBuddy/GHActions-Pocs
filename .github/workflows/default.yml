@@ -7,13 +7,13 @@ on:
     tags:
       - 'v*'
       - 'staging*'
-  pull_request:
-    branches:
-      - main
+#   pull_request:
+#     branches:
+#       - main
 
-concurrency:
-    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-    cancel-in-progress: true
+# concurrency:
+#     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+#     cancel-in-progress: true
 
 jobs:
   Test: #This should run on push to any branch
