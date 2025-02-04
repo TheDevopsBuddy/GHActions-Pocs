@@ -10,9 +10,15 @@ on:
   pull_request:
     branches:
       - main
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
   Test: #This should run on push to any branch
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,8 +56,12 @@ jobs:
 
       - name: Ensure on master/main
         run: |
-          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Not on main branch. Exiting..."
+          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref }})
+          MAIN_COMMIT=$(git rev-list -n 1 main)
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          echo "Current branch: $CURRENT_BRANCH"
+          if [ "$CURRENT_BRANCH" != "main" ]; then
+            echo "Tag is not on main branch. Exiting..."
             exit 1
           fi
 
