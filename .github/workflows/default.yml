@@ -2,11 +2,12 @@ name: Tag Deployment
 
 on:
   push:
-    branches: 
-        - '**'
+    branches-ignore: 
+        - 'main'
     tags:
       - 'v*'
       - 'staging*'
+
 #   pull_request:
 #     branches:
 #       - main
