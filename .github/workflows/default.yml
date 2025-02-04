@@ -2,8 +2,8 @@ name: Tag Deployment
 
 on:
   push:
-    branches:
-        - '**'
+    branches-ignore: 
+        - main
     tags:
       - 'v*'
       - 'staging*'
@@ -12,7 +12,7 @@ on:
       - main
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
       - name: Ensure on master/main
         run: |
           if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
-            echo "Not on main branch. Exiting..."
+            echo "Please switch to main branch"
             exit 1
           fi
 
@@ -58,12 +58,8 @@ jobs:
 
       - name: Ensure on master/main
         run: |
-          TAG_COMMIT=$(git rev-list -n 1 ${{ github.ref }})
-          MAIN_COMMIT=$(git rev-list -n 1 main)
-          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          echo "Current branch: $CURRENT_BRANCH"
-          if [ "$CURRENT_BRANCH" != "main" ]; then
-            echo "Tag is not on main branch. Exiting..."
+          if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then
+            echo "Please switch to main branch"
             exit 1
           fi
 
