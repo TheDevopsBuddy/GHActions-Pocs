@@ -10,7 +10,7 @@ on:
 
 jobs:
   Test: #This should run on push to any branch
-    if: "!startsWith(github.ref, 'refs/tags/staging')" && "!startsWith(github.ref, 'refs/tags/v')"
+    if: "!startsWith(github.ref, 'refs/tags/staging')" || "!startsWith(github.ref, 'refs/tags/v')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
