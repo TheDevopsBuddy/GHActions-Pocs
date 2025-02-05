@@ -1,0 +1,41 @@
+name: Command As Input
+on:
+  workflow_call:
+    inputs:
+      project:
+        required: false
+        type: string
+        default: 'test'
+      command:
+        description: command to run
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  Command_Runner:
+    runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        contents: write
+    steps:
+    - name: Clone Target Repo #GHActions repo containing files to be edited
+      uses: actions/checkout@v4
+      with:
+        repository: TheDevopsBuddy/GHActions-Pocs
+        ref: 'main'
+    - name: Command Runner
+      shell: bash
+      run: |         
+        echo "Running command in project: \${{ inputs.project }}"
+        cd \${{ inputs.project }}
+        if [ -z "\${{ inputs.command }}" ]; then
+          echo "No command provided. Exiting."
+          exit 1
+        else
+          \${{ inputs.command }}
+        fi
