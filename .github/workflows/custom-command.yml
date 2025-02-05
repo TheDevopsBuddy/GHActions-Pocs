@@ -4,12 +4,17 @@ on:
  push:
  workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   With_Command_Input:
     uses: .\.github\workflows\test.yml@main
     with:
       project: test
       command: 'echo "test"'
+
   Without_Command_Input:
     uses: ./.github\workflows\test.yml@main
     with:

@@ -6,7 +6,7 @@ on:
       project:
         required: false
         type: string
-        default: 'test'
+        default: ''
       command:
         description: Command to run
         required: false
