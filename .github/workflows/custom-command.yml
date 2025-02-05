@@ -1,4 +1,4 @@
-name: CICD
+name: Custom Command
 
 on:
  push:
