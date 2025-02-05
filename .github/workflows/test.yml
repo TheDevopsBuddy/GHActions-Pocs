@@ -37,9 +37,7 @@ jobs:
         echo "Running command on project: ${{ inputs.project }}"
         if [ -z "${{ inputs.command }}" ]; then
           ls -la ${{ inputs.project }}
-          exit 1
         else
           sh -c "${{ inputs.command }}"
-          exit 0
         fi
 
