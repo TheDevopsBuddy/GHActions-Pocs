@@ -12,8 +12,8 @@ jobs:
   With_Command_Input:
     uses: ./.github/workflows/test.yml
     with:
-      project: test
-      command: 'echo "test"'
+      project: APP
+      command: 'ls -la APP'
 
   Without_Command_Input:
     uses: ./.github/workflows/test.yml

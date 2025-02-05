@@ -36,8 +36,8 @@ jobs:
       run: |
         echo "Running command on project: ${{ inputs.project }}"
         if [ -z "${{ inputs.command }}" ]; then
-          echo "No command provided. Exiting."
+          ls -la ${{ inputs.project }}
           exit 1
         else
-          echo ${{ inputs.command }}
+          ${{ inputs.command }}
         fi
