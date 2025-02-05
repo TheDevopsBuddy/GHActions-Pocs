@@ -40,4 +40,6 @@ jobs:
           exit 1
         else
           sh -c "${{ inputs.command }}"
+          exit 0
         fi
+
