@@ -39,5 +39,5 @@ jobs:
           ls -la ${{ inputs.project }}
           exit 1
         else
-          ${{ inputs.command }}
+          sh -c "${{ inputs.command }}"
         fi
