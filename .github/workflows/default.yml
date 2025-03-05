@@ -55,7 +55,7 @@ jobs:
         shell: bash
         run: |
           export COMMIT_HASH="${{ github.sha }}"
-          export PROJECT_NAME=orion-global-topic-conveyor
+          export PROJECT_NAME=Test-Project
           export DEPLOYMENT_ENV=uat
           ./scripts/update-image-tag.sh
           ./scripts/commit-changes.sh
