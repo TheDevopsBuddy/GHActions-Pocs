@@ -48,12 +48,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          repository: TDB-ORG/cross-repo-update
+          ref: main
       - name: Deploy to Production
         shell: bash
         run: |
-          echo "Deploying ${{ github.sha }} to production..."
           export COMMIT_HASH="${{ github.sha }}"
-          echo $COMMIT_HASH
+          export PROJECT_NAME=orion-global-topic-conveyor
+          export DEPLOYMENT_ENV=uat
+          ./scripts/update-image-tag.sh
+          ./scripts/commit-changes.sh
 
   deploy-uat-mirror:
     if: startsWith(github.ref, 'refs/tags/mirror-staging')
