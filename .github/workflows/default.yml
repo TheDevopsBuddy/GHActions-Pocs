@@ -49,7 +49,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Deploy to Production
-        run: echo "Deploying to production..."
+        run: echo "Deploying ${{ github.sha }} to production..."
 
   deploy-uat-mirror:
     if: startsWith(github.ref, 'refs/tags/mirror-staging')
