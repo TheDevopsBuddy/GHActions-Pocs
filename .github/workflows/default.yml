@@ -49,6 +49,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Deploy to Production
+        shell: bash
         run: |
           echo "Deploying ${{ github.sha }} to production..."
           export COMMIT_HASH="${{ github.sha }}"
