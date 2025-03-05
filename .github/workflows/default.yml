@@ -60,7 +60,7 @@ jobs:
         run: |
           export COMMIT_HASH="${{ github.sha }}"
           export PROJECT_NAME=Test-Project
-          export DEPLOYMENT_ENV=uat
+          export DEPLOYMENT_ENV=prod
           ./scripts/update-image-tag.sh
           ./scripts/commit-changes.sh
 
