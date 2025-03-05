@@ -19,12 +19,17 @@ jobs:
   Test: # This should run on push to any branch
     if: "!startsWith(github.ref, 'refs/tags/mirror-v') && !startsWith(github.ref, 'refs/tags/mirror-staging')"
     runs-on: ubuntu-latest
+    outputs:
+      githubsha: ${{ steps.githubsha.outputs.githubsha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       # test
       - name: Run tests
         run: echo "Running tests..."
+      - name: set github-sha
+        id: githubsha
+        run: echo githubsha=$(git rev-parse --short ${{ github.sha }}) >> $GITHUB_OUTPUT
 
   Build: # This should run on push tag v1 and staging
     if: "startsWith(github.ref, 'refs/tags/staging') || startsWith(github.ref, 'refs/tags/v')"
@@ -35,6 +40,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Run Build
         run: echo "Running Build..."
+      - name: publishing build
+        run : echo "${{ needs.Test.outputs.githubsha }}"
 # This is uat code below
   deploy-uat:
     if: startsWith(github.ref, 'refs/tags/staging')
@@ -60,7 +67,7 @@ jobs:
       - name: Deploy to Production
         shell: bash
         run: |
-          export COMMIT_HASH="${{ github.sha }}"
+          export COMMIT_HASH="${{ needs.Test.outputs.githubsha }}"
           export PROJECT_NAME=Test-Project
           export DEPLOYMENT_ENV=prod
           chmod -R +x ./scripts
