@@ -10,6 +10,9 @@ on:
       - 'mirror-v*'
       - 'mirror-staging*'
 
+permissions: 
+  id-token: write
+
 jobs:
   Test: # This should run on push to any branch
     if: "!startsWith(github.ref, 'refs/tags/mirror-v') && !startsWith(github.ref, 'refs/tags/mirror-staging')"
