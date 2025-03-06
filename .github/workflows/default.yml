@@ -29,9 +29,11 @@ jobs:
       - name: Run tests
         run: echo "Running tests..."
       - name: set github-sha
+        if: startsWith(github.ref, 'refs/tags/v')
         id: githubsha
-        run: echo githubsha=$(git rev-parse --short=8 ${{ github.sha }}) >> $GITHUB_OUTPUT
+        run: echo githubsha=$(git rev-parse --short ${{ github.sha }}) >> $GITHUB_OUTPUT
       - name: set nonprod sha
+        if:  startsWith(github.ref, 'refs/tags/staging')
         id: nonprodSha
         run: echo nonprod_sha=$(git rev-parse ${{ github.sha }}) >> $GITHUB_OUTPUT
 
