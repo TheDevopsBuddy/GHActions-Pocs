@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the output file
-FILE="date_time.txt"
+FILE="scripts/date_time.txt"
 
 # Get the current date and time in the desired format
 CURRENT_DATE_TIME=$(date +"%d-%m-%Y : %H:%M")
