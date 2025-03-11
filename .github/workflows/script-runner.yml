@@ -15,11 +15,14 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Upload the script as an artifact
+      - name:  'Tar files'
+        run: tar -cvf my-script.tar ./scripts
+
       - name: Upload Script as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: my-script
-          path: scripts/run.sh
+          path: my-script.tar
 
   download-and-execute:
     runs-on: ubuntu-latest
@@ -32,7 +35,9 @@ jobs:
         with:
           name: my-script
           path: ./ # Downloads the artifact to the current directory
-
+      
+      - name: Extract Script
+        run: tar -xvf my-script.tar
       # Step 4: Grant execute permission and run the script
       - name: Execute the Script
         run: ./run.sh
