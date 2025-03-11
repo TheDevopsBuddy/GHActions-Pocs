@@ -35,3 +35,15 @@ jobs:
         with:
           name: my-script
           path: ./ # Downloads the tar file to the current directory
+
+      # Step 2: Extract the tar archive
+      - name: Extract Script
+        run: tar -xvf my-script.tar
+
+      # Step 3: Execute the script
+      - name: Execute the Script
+        run: ./scripts/run.sh # Use the full path to the extracted script
+
+      # Step 4: Print the output of the script
+      - name: Cat output
+        run: cat scripts/date_time.txt # Use the path to the output file
