@@ -28,7 +28,7 @@ jobs:
       - name: Download Script Artifact
         uses: actions/download-artifact@v4
         with:
-          name: script
+          name: my-script
           path: ./ # Downloads the artifact to the current directory
 
       # Step 4: Grant execute permission and run the script
