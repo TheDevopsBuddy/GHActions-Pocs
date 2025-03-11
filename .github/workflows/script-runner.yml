@@ -14,8 +14,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Upload the script as an artifact
-      - name:  'Tar files'
+      # Step 2: Tar and upload the script as an artifact
+      - name: Tar files
         run: tar -cvf my-script.tar ./scripts
 
       - name: Upload Script as Artifact
@@ -29,19 +29,9 @@ jobs:
     needs: upload # Add dependency on the 'upload' job
 
     steps:
-      # Step 3: Download the artifact in a new step
+      # Step 1: Download the artifact
       - name: Download Script Artifact
         uses: actions/download-artifact@v4
         with:
           name: my-script
-          path: ./ # Downloads the artifact to the current directory
-      
-      - name: Extract Script
-        run: tar -xvf my-script.tar
-      # Step 4: Grant execute permission and run the script
-      - name: Execute the Script
-        run: ./run.sh
-
-      # Step 5: Print the output of the script
-      - name: Cat output
-        run: cat date_time.txt
+          path: ./ # Downloads the tar file to the current directory
