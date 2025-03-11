@@ -16,7 +16,7 @@ jobs:
 
       # Step 2: Upload the script as an artifact
       - name: Upload Script as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: my-script
           path: scripts/run.sh
@@ -26,7 +26,7 @@ jobs:
     steps:
     # Step 3: Download the artifact in a new step
       - name: Download Script Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: script
           path: ./ # Downloads the artifact to the current directory
