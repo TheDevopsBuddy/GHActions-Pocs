@@ -13,7 +13,10 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
-
+      
+      - name: Grant Execute Permission
+        run: chmod +x scripts/run.sh
+    
       # Step 2: Tar and upload the script as an artifact
       - name: Tar files
         run: tar -cvf my-script.tar ./scripts
