@@ -8,8 +8,6 @@ jobs:
     e2e-test-hold:
       name: Approval Hold
       runs-on: ubuntu-latest
-      steps:
-        - name: Approval Required
-          run: echo "Approval required to proceed."
-          if: ${{ github.event_name == 'workflow_dispatch' }}
+      environment: HOLD
+  
   
