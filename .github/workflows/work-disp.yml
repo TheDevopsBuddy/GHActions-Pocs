@@ -1,7 +1,10 @@
 name: Workflow Dispatch POC
 on:
+    push:
+        branches:
+            - workflow_dispatch_poc
     workflow_dispatch:
-  jobs:
+jobs:
     e2e-test-hold:
       name: Approval Hold
       runs-on: ubuntu-latest
